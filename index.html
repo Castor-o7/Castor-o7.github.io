@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josh D. — Code Detective</title>
+    <meta name="description" content="Josh Davis: security research, embedded systems, and the occasional game. Case files, toolkit, and contact.">
+    <meta property="og:title" content="Josh D. — Code Detective">
+    <meta property="og:description" content="Security research, embedded systems, and the occasional game.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://castor-o7.github.io/">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Crect x='30' y='30' width='40' height='40' fill='none' stroke='%23d4af37' stroke-width='6' transform='rotate(45 50 50)'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Geometric accents -->
+    <div class="geo geo-1"></div>
+    <div class="geo geo-2"></div>
+    <div class="geo geo-3"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">JD</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#cases">Cases</a>
+                <a href="#after-hours">After Hours</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="tagline">Code Detective</p>
+            <h1>Josh D.</h1>
+            <p class="subtitle">
+                Poring over documentation and binaries.<br>
+                Engineering elegant solutions in a fast-paced world.
+            </p>
+            <div class="hero-cta">
+                <a href="#cases" class="btn btn-primary">View Cases</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="hero-art">
+            <svg viewBox="0 0 200 200" class="hero-svg" aria-hidden="true">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="var(--accent)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="60" fill="none" stroke="var(--accent)" stroke-width="0.5"/>
+                <line x1="20" y1="100" x2="180" y2="100" stroke="var(--accent)" stroke-width="0.5"/>
+                <line x1="100" y1="20" x2="100" y2="180" stroke="var(--accent)" stroke-width="0.5"/>
+                <rect x="70" y="70" width="60" height="60" fill="none" stroke="var(--accent)" stroke-width="1" transform="rotate(45 100 100)"/>
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>The Detective</h2>
+            </div>
+            <div class="about-content">
+                <p class="lead">
+                    B.S. Computer Science with University Honors. I approach code like a case file —
+                    every bug leaves a trace, every system tells a story.
+                </p>
+                <p>
+                    My investigations span the stack: from embedded firmware running on microcontrollers
+                    to distributed systems orchestrated in the cloud. I specialize in security research,
+                    systems programming, and building tools that reveal what's hidden in the data.
+                </p>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-value">Full-Stack</span>
+                        <span class="stat-label">Systems to Web</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Security</span>
+                        <span class="stat-label">Research Focus</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Embedded</span>
+                        <span class="stat-label">IoT & Hardware</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases" class="section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Case Files</h2>
+            </div>
+            <div class="cases-grid">
+
+                <article class="case-card">
+                    <div class="case-number">001</div>
+                    <h3>Carputer GPS Tracker</h3>
+                    <p>
+                        Full-stack vehicle tracking system with real-time GPS, APRS radio integration,
+                        and offline-capable mapping. Embedded firmware to cloud infrastructure,
+                        built with a capstone team.
+                    </p>
+                    <div class="case-tags">
+                        <span>Python</span>
+                        <span>React</span>
+                        <span>Docker</span>
+                        <span>Embedded</span>
+                    </div>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">002</div>
+                    <h3>CTF Swiss Army Knife</h3>
+                    <p>
+                        LangGraph agent for solving Capture The Flag challenges. Chains encoding tools,
+                        radare2 binary analysis, file inspection, and web requests on its own until
+                        it finds the flag.
+                    </p>
+                    <div class="case-tags">
+                        <span>LangGraph</span>
+                        <span>Radare2</span>
+                        <span>CTF</span>
+                    </div>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">003</div>
+                    <h3>LoRa Packet Sniffer</h3>
+                    <p>
+                        IoT security research tool. CircuitPython firmware captures LoRa radio packets
+                        and streams them in PCAP-NG format over a second serial port for Wireshark analysis.
+                    </p>
+                    <div class="case-tags">
+                        <span>CircuitPython</span>
+                        <span>LoRa</span>
+                        <span>Wireshark</span>
+                    </div>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">004</div>
+                    <h3>Reputation Paradox Detector</h3>
+                    <p>
+                        Threat intel aggregator that cross-references VirusTotal, AbuseIPDB, GreyNoise,
+                        and OTX for the same IP. An attacker can game one reputation system, rarely all
+                        of them: the disagreements are the evidence.
+                    </p>
+                    <div class="case-tags">
+                        <span>Python</span>
+                        <span>Threat Intel</span>
+                        <span>OSINT</span>
+                    </div>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">005</div>
+                    <h3>Panoptes</h3>
+                    <p>
+                        Agentic network traffic analyzer. Captures packets with Scapy, reads Suricata
+                        alerts, keeps history in SQLite, and writes a plain-language morning digest
+                        explaining what happened on the wire and why traffic was blocked.
+                    </p>
+                    <div class="case-tags">
+                        <span>Python</span>
+                        <span>Scapy</span>
+                        <span>Suricata</span>
+                        <span>MCP</span>
+                    </div>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">006</div>
+                    <h3>NOAA Storm Events Map</h3>
+                    <p>
+                        Weather data visualization over 1.9 million NOAA storm events from 1950 to 2024.
+                        Interactive map with filtering, backed by PostgreSQL and a FastAPI service.
+                    </p>
+                    <div class="case-tags">
+                        <span>Python</span>
+                        <span>FastAPI</span>
+                        <span>PostgreSQL</span>
+                        <span>Folium</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="after-hours" class="section">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>After Hours</h2>
+            </div>
+            <p class="section-intro">
+                Games and simulations, built for the fun of it. The ones marked open run right here in your browser.
+            </p>
+            <div class="cases-grid">
+
+                <article class="case-card">
+                    <div class="case-number">A01</div>
+                    <h3>Boids</h3>
+                    <p>
+                        Flocking simulation after Craig Reynolds: separation, alignment, and cohesion,
+                        and a flock emerges. Click or drag to add more.
+                    </p>
+                    <div class="case-tags">
+                        <span>JavaScript</span>
+                        <span>p5.js</span>
+                        <span>Simulation</span>
+                    </div>
+                    <a href="play/boids/" class="case-link">Open the simulation</a>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">A02</div>
+                    <h3>Falling Sand</h3>
+                    <p>
+                        Particle sandbox. Hold the mouse down to pour sand and watch it pile up.
+                    </p>
+                    <div class="case-tags">
+                        <span>JavaScript</span>
+                        <span>p5.js</span>
+                        <span>Physics</span>
+                    </div>
+                    <a href="play/sand/" class="case-link">Open the sandbox</a>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">A03</div>
+                    <h3>Asteroids</h3>
+                    <p>
+                        The arcade classic, rebuilt as a React app drawing with p5.
+                    </p>
+                    <div class="case-tags">
+                        <span>React</span>
+                        <span>p5.js</span>
+                        <span>Game</span>
+                    </div>
+                    <a href="play/asteroids/" class="case-link">Play in browser</a>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">A04</div>
+                    <h3>Gunbird 2 Shmup</h3>
+                    <p>
+                        Vertical shoot 'em up prototype inspired by Gunbird 2. Arrow keys to move,
+                        spacebar to shoot.
+                    </p>
+                    <div class="case-tags">
+                        <span>Phaser 3</span>
+                        <span>JavaScript</span>
+                        <span>Game</span>
+                    </div>
+                    <a href="play/gunbird2/" class="case-link">Play in browser</a>
+                </article>
+
+                <article class="case-card">
+                    <div class="case-number">A05</div>
+                    <h3>Connect Four AI</h3>
+                    <p>
+                        Game-playing agents using Monte Carlo Tree Search and Minimax, pitted against
+                        each other on an immutable board.
+                    </p>
+                    <div class="case-tags">
+                        <span>Python</span>
+                        <span>MCTS</span>
+                        <span>Algorithms</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>Toolkit</h2>
+            </div>
+            <div class="skills-content">
+                <div class="skill-category">
+                    <h4>Languages</h4>
+                    <ul>
+                        <li>Python</li>
+                        <li>C / C++</li>
+                        <li>Rust</li>
+                        <li>JavaScript / TypeScript</li>
+                        <li>SQL</li>
+                        <li>Bash</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Systems & Security</h4>
+                    <ul>
+                        <li>Network Analysis (Scapy, Wireshark)</li>
+                        <li>Embedded Systems (ESP32, CircuitPython)</li>
+                        <li>Linux Systems Programming</li>
+                        <li>Docker & Containerization</li>
+                        <li>IoT Protocols (LoRa, APRS)</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Web & Data</h4>
+                    <ul>
+                        <li>React / Frontend</li>
+                        <li>FastAPI / Flask</li>
+                        <li>PostgreSQL / ChromaDB</li>
+                        <li>LangChain / RAG Systems</li>
+                        <li>CI/CD & Infrastructure</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section section-contact">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>Open a Case</h2>
+            </div>
+            <div class="contact-content">
+                <p class="lead">
+                    Got a problem that needs solving? Let's talk.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:joshdbinary@gmail.com" class="contact-link">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">joshdbinary@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/Castor-o7" class="contact-link" target="_blank" rel="noopener">
+                        <span class="contact-label">GitHub</span>
+                        <span class="contact-value">github.com/Castor-o7</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/joshua-davis-1a730737b/" class="contact-link" target="_blank" rel="noopener">
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-value">in/joshua-davis</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Josh D. — All cases closed.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

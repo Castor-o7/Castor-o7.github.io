@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boids Flocking Simulation</title>
+    <meta name="description" content="Interactive boids flocking simulation - watch artificial life emerge from simple rules">
+    <meta name="keywords" content="boids, flocking, simulation, artificial life, p5js">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            z-index: 100;
+        }
+        
+        h1 {
+            color: #19cdff;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(25, 205, 255, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            font-weight: 300;
+        }
+        
+        .canvas-container {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 30px rgba(25, 205, 255, 0.3),
+                0 0 60px rgba(25, 205, 255, 0.1);
+        }
+        
+        canvas {
+            display: block;
+            border: 2px solid rgba(25, 205, 255, 0.5);
+            border-radius: 8px;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            color: #19cdff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(25, 205, 255, 0.3);
+            font-size: 14px;
+            z-index: 1000;
+            max-width: 250px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .controls h3 {
+            margin: 0 0 15px 0;
+            color: #19cdff;
+            font-weight: 400;
+            font-size: 16px;
+        }
+        
+        .controls p {
+            margin: 8px 0;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .controls strong {
+            color: #19cdff;
+        }
+        
+        .stats {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            color: #19cdff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(25, 205, 255, 0.3);
+            font-size: 14px;
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #19cdff;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .controls {
+                position: relative;
+                width: 90%;
+                margin: 20px auto 0;
+                right: auto;
+                top: auto;
+            }
+            
+            .stats {
+                position: relative;
+                left: auto;
+                top: auto;
+                margin: 0 auto 20px;
+                width: fit-content;
+            }
+            
+            .header {
+                margin-bottom: 10px;
+            }
+            
+            .footer {
+                position: relative;
+                margin-top: 20px;
+                transform: none;
+                left: auto;
+                bottom: auto;
+            }
+        }
+        
+        /* Hide controls on very small screens */
+        @media (max-width: 480px) {
+            .controls {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BOIDS</h1>
+        <p class="subtitle">Emergent flocking behavior simulation</p>
+    </div>
+    
+    <div class="stats" id="stats">
+        <div>Boids: <span id="boid-count">100</span></div>
+        <div>FPS: <span id="fps">60</span></div>
+    </div>
+    
+    <div class="canvas-container" id="canvas-container">
+        <!-- p5.js will create the canvas here -->
+    </div>
+    
+    <div class="controls">
+        <h3>Controls</h3>
+        <p><strong>Click:</strong> Add a boid</p>
+        <p><strong>Drag:</strong> Add multiple boids</p>
+        <p><strong>Spacebar:</strong> Clear all boids</p>
+        <p><strong>R:</strong> Reset to 100 boids</p>
+    </div>
+    
+    <div class="footer">
+        <p>Based on Craig Reynolds' <a href="https://www.red3d.com/cwr/boids/" target="_blank">Boids algorithm</a> &middot; <a href="../../">Back to case files</a></p>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="boids.js"></script>
+    
+    <script>
+        // Update stats display
+        function updateStats() {
+            if (typeof boids !== 'undefined') {
+                document.getElementById('boid-count').textContent = boids.length;
+            }
+            // Check if frameRate function exists before calling it
+            if (typeof frameRate === 'function') {
+                document.getElementById('fps').textContent = Math.round(frameRate());
+            }
+        }
+        
+        // Update stats every second, but wait for p5.js to load
+        setTimeout(() => {
+            setInterval(updateStats, 1000);
+        }, 1000);
+    </script>
+</body>
+</html>

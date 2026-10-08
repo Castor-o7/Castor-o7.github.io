@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Sand — Josh D.</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #888;
+            font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+            font-size: 14px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            padding: 1.5rem 1rem;
+        }
+        h1 { color: #d4af37; font-size: 1rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; }
+        canvas { display: block; max-width: 100%; height: auto !important; border: 1px solid #222; }
+        a { color: #d4af37; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Falling Sand</h1>
+    <main></main>
+    <p>Hold the mouse down to pour.</p>
+    <p><a href="../../">&larr; Back to case files</a></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="naturesand.js"></script>
+</body>
+</html>
