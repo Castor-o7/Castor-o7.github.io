@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Falling Sand — Josh D.</title>
+    <meta name="description" content="Interactive falling sand simulation: pour grains and watch them slide into a pile.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -11,6 +12,7 @@
             color: #888;
             font-family: 'IBM Plex Mono', 'SF Mono', monospace;
             font-size: 14px;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -18,17 +20,45 @@
             justify-content: center;
             gap: 1.25rem;
             padding: 1.5rem 1rem;
+            text-align: center;
         }
         h1 { color: #d4af37; font-size: 1rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; }
-        canvas { display: block; max-width: 100%; height: auto !important; border: 1px solid #222; }
+        #canvas-container { width: 100%; max-width: 802px; border: 1px solid #222; }
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+            cursor: crosshair;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+        .controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 1rem; }
+        .keys { display: none; }
+        @media (hover: hover) and (pointer: fine) { .keys { display: inline; } }
+        .stats { color: #e8e8e8; font-variant-numeric: tabular-nums; }
+        button {
+            background: none;
+            border: 1px solid #333;
+            color: #d4af37;
+            font: inherit;
+            padding: 0.35rem 0.9rem;
+            cursor: pointer;
+        }
+        button:hover, button:focus-visible { border-color: #d4af37; }
         a { color: #d4af37; text-decoration: none; }
         a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
     <h1>Falling Sand</h1>
-    <main></main>
-    <p>Hold the mouse down to pour.</p>
+    <main id="canvas-container"></main>
+    <div class="controls">
+        <span>Click or touch and hold to pour.</span>
+        <button type="button" id="clear">Clear<span class="keys"> (C)</span></button>
+        <span class="stats">Grains <span id="grain-count">&ndash;</span></span>
+    </div>
     <p><a href="../../">&larr; Back to case files</a></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <script src="naturesand.js"></script>

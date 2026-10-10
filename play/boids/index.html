@@ -3,216 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boids Flocking Simulation</title>
-    <meta name="description" content="Interactive boids flocking simulation - watch artificial life emerge from simple rules">
-    <meta name="keywords" content="boids, flocking, simulation, artificial life, p5js">
-    
+    <title>Boids — Josh D.</title>
+    <meta name="description" content="Interactive boids flocking simulation: flocks emerging from three simple steering rules.">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            background: #0a0a0a;
+            color: #888;
+            font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            z-index: 100;
-        }
-        
-        h1 {
-            color: #19cdff;
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            font-weight: 300;
-            text-shadow: 0 0 20px rgba(25, 205, 255, 0.5);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-        
-        .subtitle {
-            color: #888;
-            font-size: clamp(0.8rem, 2vw, 1.1rem);
-            font-weight: 300;
-        }
-        
-        .canvas-container {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 
-                0 0 30px rgba(25, 205, 255, 0.3),
-                0 0 60px rgba(25, 205, 255, 0.1);
-        }
-        
-        canvas {
-            display: block;
-            border: 2px solid rgba(25, 205, 255, 0.5);
-            border-radius: 8px;
-        }
-        
-        .controls {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            color: #19cdff;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(25, 205, 255, 0.3);
-            font-size: 14px;
-            z-index: 1000;
-            max-width: 250px;
-            transition: opacity 0.3s ease;
-        }
-        
-        .controls h3 {
-            margin: 0 0 15px 0;
-            color: #19cdff;
-            font-weight: 400;
-            font-size: 16px;
-        }
-        
-        .controls p {
-            margin: 8px 0;
-            line-height: 1.5;
-            color: #ccc;
-        }
-        
-        .controls strong {
-            color: #19cdff;
-        }
-        
-        .stats {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            color: #19cdff;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(25, 205, 255, 0.3);
-            font-size: 14px;
-            z-index: 1000;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .footer {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #666;
-            font-size: 12px;
+            justify-content: center;
+            gap: 1.25rem;
+            padding: 1.5rem 1rem;
             text-align: center;
         }
-        
-        .footer a {
-            color: #19cdff;
-            text-decoration: none;
+        h1 { color: #d4af37; font-size: 1rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; }
+        #canvas-container { width: 100%; max-width: 1100px; border: 1px solid #222; }
+        canvas { display: block; max-width: 100%; height: auto !important; touch-action: none; }
+        .controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 1rem; }
+        .keys { display: none; }
+        @media (hover: hover) and (pointer: fine) { .keys { display: inline; } }
+        .stats { color: #e8e8e8; font-variant-numeric: tabular-nums; }
+        button {
+            background: none;
+            border: 1px solid #333;
+            color: #d4af37;
+            font: inherit;
+            padding: 0.35rem 0.9rem;
+            cursor: pointer;
         }
-        
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .controls {
-                position: relative;
-                width: 90%;
-                margin: 20px auto 0;
-                right: auto;
-                top: auto;
-            }
-            
-            .stats {
-                position: relative;
-                left: auto;
-                top: auto;
-                margin: 0 auto 20px;
-                width: fit-content;
-            }
-            
-            .header {
-                margin-bottom: 10px;
-            }
-            
-            .footer {
-                position: relative;
-                margin-top: 20px;
-                transform: none;
-                left: auto;
-                bottom: auto;
-            }
-        }
-        
-        /* Hide controls on very small screens */
-        @media (max-width: 480px) {
-            .controls {
-                display: none;
-            }
-        }
+        button:hover, button:focus-visible { border-color: #d4af37; }
+        a { color: #d4af37; text-decoration: none; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>BOIDS</h1>
-        <p class="subtitle">Emergent flocking behavior simulation</p>
-    </div>
-    
-    <div class="stats" id="stats">
-        <div>Boids: <span id="boid-count">100</span></div>
-        <div>FPS: <span id="fps">60</span></div>
-    </div>
-    
-    <div class="canvas-container" id="canvas-container">
-        <!-- p5.js will create the canvas here -->
-    </div>
-    
+    <h1>Boids</h1>
+    <main id="canvas-container"></main>
     <div class="controls">
-        <h3>Controls</h3>
-        <p><strong>Click:</strong> Add a boid</p>
-        <p><strong>Drag:</strong> Add multiple boids</p>
-        <p><strong>Spacebar:</strong> Clear all boids</p>
-        <p><strong>R:</strong> Reset to 100 boids</p>
+        <span>Click or drag to add boids.</span>
+        <button type="button" id="clear">Clear<span class="keys"> (Space)</span></button>
+        <button type="button" id="reset">Reset<span class="keys"> (R)</span></button>
+        <span class="stats">Boids <span id="boid-count">&ndash;</span> &middot; FPS <span id="fps">&ndash;</span></span>
     </div>
-    
-    <div class="footer">
-        <p>Based on Craig Reynolds' <a href="https://www.red3d.com/cwr/boids/" target="_blank">Boids algorithm</a> &middot; <a href="../../">Back to case files</a></p>
-    </div>
-    
+    <p>Based on Craig Reynolds' <a href="https://www.red3d.com/cwr/boids/" target="_blank" rel="noopener">Boids algorithm</a>.</p>
+    <p><a href="../../">&larr; Back to case files</a></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <script src="boids.js"></script>
-    
-    <script>
-        // Update stats display
-        function updateStats() {
-            if (typeof boids !== 'undefined') {
-                document.getElementById('boid-count').textContent = boids.length;
-            }
-            // Check if frameRate function exists before calling it
-            if (typeof frameRate === 'function') {
-                document.getElementById('fps').textContent = Math.round(frameRate());
-            }
-        }
-        
-        // Update stats every second, but wait for p5.js to load
-        setTimeout(() => {
-            setInterval(updateStats, 1000);
-        }, 1000);
-    </script>
 </body>
 </html>
